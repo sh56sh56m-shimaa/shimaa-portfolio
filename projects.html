@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Shimaa Mohamed</title>
+    
+    <style>
+    /* ==================== General Settings ==================== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f5f5;
+        min-height: 100vh;
+    }
+
+    /* ==================== Navigation Bar ==================== */
+    .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2545d7;
+        cursor: pointer;
+    }
+
+    .logo:hover {
+        color: #3d3de0;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        padding: 5px 10px;
+    }
+
+    .nav-links a:hover {
+        color: #264dfd;
+    }
+
+    .nav-links a.active {
+        color: #4766f0;
+        border-bottom: 2px solid #3c5df0;
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        transition: all 0.3s ease;
+    }
+
+    /* ==================== Projects Section ==================== */
+    .projects-section {
+        padding: 120px 20px 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 48px;
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        position: relative;
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(135deg, #4c66dd 0%, #1e39e7 100%);
+        border-radius: 2px;
+    }
+
+    .page-subtitle {
+        text-align: center;
+        color: #666;
+        font-size: 18px;
+        margin-bottom: 60px;
+        animation: fadeInUp 0.8s ease;
+    }
+
+    /* ==================== Filter Buttons ==================== */
+    .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease;
+    }
+
+    .filter-btn {
+        padding: 12px 25px;
+        border: 2px solid #4465f5;
+        background: white;
+        color: #445ed5;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+        background: linear-gradient(135deg, #3a59e7 0%, #101fc7 100%);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    /* ==================== Projects Grid ==================== */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        animation: fadeInUp 1.2s ease;
+    }
+
+    /* ==================== Project Card ==================== */
+    .project-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-image {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(135deg, #3652d2 0%, #1118da 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image img {
+        transform: scale(1.1);
+    }
+
+    /* Placeholder for projects without images */
+    .project-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        color: white;
+    }
+
+    .project-info {
+        padding: 30px;
+    }
+
+    .project-category {
+        display: inline-block;
+        background: #f0f0f0;
+        color: #667eea;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    .project-info h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .project-info p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+
+    /* ==================== Project Tags ==================== */
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .project-tags span {
+        background: #f8f9fa;
+        color: #667eea;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    /* ==================== Project Links ==================== */
+    .project-links {
+        display: flex;
+        gap: 15px;
+    }
+
+    .project-link {
+        flex: 1;
+        text-align: center;
+        padding: 12px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-demo {
+        background: linear-gradient(135deg, #3b54c4 0%, #151cd9 100%);
+        color: white;
+    }
+
+    .btn-demo:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-code {
+        background: white;
+        color: #4464f1;
+        border: 2px solid #2c4cd9;
+    }
+
+    .btn-code:hover {
+        background: #3a54ca;
+        color: white;
+    }
+
+    /* ==================== Empty State ==================== */
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #999;
+    }
+
+    .empty-state h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    /* ==================== Animations ==================== */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ==================== Mobile Responsive ==================== */
+    @media screen and (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+        
+        .nav-links {
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background: white;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+        }
+        
+        .nav-links.active {
+            left: 0;
+        }
+
+        .page-title {
+            font-size: 36px;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .filter-buttons {
+            padding: 0 10px;
+        }
+
+        .filter-btn {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">Shimaa Mohamed</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <h1 class="page-title">My Projects</h1>
+        <p class="page-subtitle">Here are some of the projects I've worked on</p>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="mobile">java</button>
+            <button class="filter-btn" data-filter="other">Other</button>
+        </div>
+        
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="project-placeholder">🌐</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3>E-Commerce Website</h3>
+                    <p>
+                        A full-stack e-commerce platform with shopping cart, payment integration, 
+                        and user authentication. Built with modern web technologies.
+                    </p>
+                    <div class="project-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="project-placeholder">📝</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3>java</h3>
+                    <p>
+                     Team and I worked together on a complete website that manages the Eco Technology company.
+                    </p>
+                    <div class="project-tags">
+                        <span>java swing</span>
+                        <span>my SQL</span>
+                        <span>Exception Handing</span>
+                        <span>JDBC</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="project-placeholder">☁️</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web Development</span>
+                    <h3>Weather Dashboard</h3>
+                    <p>
+                        A responsive weather application that displays current weather conditions 
+                        and forecasts using real-time API data.
+                    </p>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>API</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <div class="project-placeholder">📱</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">EMBEDDED SYSTEMS</span>
+                    <h3>EMBEDDED SYSTEMS TRAINER</h3>
+                    <p>
+                        The project idea is to build a portable embedded systems bag that contains an Arduino Mega with ready-connected modules and sensors, along with a small PC for programming.
+You can program directly without any external wiring, making it a simple and portable embedded training lab
+                    </p>
+                    <div class="project-tags">
+                        <span>Arduino mega</span>
+                        <span>protable lab</span>
+                        <span>Wi-Fi Communication</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+                        <!-- Project 5 -->
+            <div class="project-card" data-category="other">
+                <div class="project-image">
+                    <div class="project-placeholder">🤖</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Programmed Electronic Lathe</span>
+                    <h3>Programmed Electronic Lathe</h3>
+                    <p>
+                   The project is a programmable electronic lathe using a microcontroller.
+The microcontroller controls the motor speed and movement electronically instead of manual operation, making the lathe more precise and stable.
+                    </p>
+                    <div class="project-tags">
+                        <span>Embedded Systems</span>
+                        <span>Microcontroller</span>
+                
+                        <span>Electronic Lathe</span>
+                        <span>Programmable Machine</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+          
+            
+            <!-- Project 6 -->
+            <div class="project-card" data-category="other">
+                <div class="project-image">
+                    <div class="project-placeholder">🤖</div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Smart Shoe for the Blind</span>
+                    <h3>Smart Shoe for the Blind</h3>
+                    <p>
+                       previously worked on a project called “Smart Shoe for the Blind”.
+The idea was to help visually impaired people avoid obstacles using distance sensors.
+The shoe uses an Arduino and ultrasonic sensors to detect obstacles and gives feedback through vibration or sound to increase safety while walking..
+                    </p>
+                    <div class="project-tags">
+                        <span>Embedded Systems</span>
+                        <span>Arduino</span>
+                        <span>Ultrasonic Sensor</span>
+                        <span>Smart Systems</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link btn-demo">Live Demo</a>
+                        <a href="#" class="project-link btn-code">View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <script>
+    // Wait until page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ===================== Hamburger Menu for Mobile =====================
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+        
+        // ===================== Close menu when clicking on any link =====================
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // ===================== Filter Projects =====================
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        if (card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    }
+                });
+            });
+        });
+        
+        console.log('Projects page is ready! 🚀');
+    });
+    </script>
+</body>
+</html>

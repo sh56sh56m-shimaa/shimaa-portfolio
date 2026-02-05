@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Shimaa Mohamed</title>
+    
+    <style>
+    /* ==================== General Settings ==================== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+
+    /* ==================== Navigation Bar ==================== */
+    .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #667eea;
+        cursor: pointer;
+    }
+
+    .logo:hover {
+        color: #764ba2;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        padding: 5px 10px;
+    }
+
+    .nav-links a:hover {
+        color: #667eea;
+    }
+
+    .nav-links a.active {
+        color: #667eea;
+        border-bottom: 2px solid #667eea;
+    }
+
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        transition: all 0.3s ease;
+    }
+
+    /* ==================== About Section ==================== */
+    .about-section {
+        padding: 120px 20px 80px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 48px;
+        text-align: center;
+        color: #333;
+        margin-bottom: 60px;
+        position: relative;
+        animation: fadeInDown 0.8s ease;
+    }
+
+    .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(135deg, #3f4d89 0%, #4b59a2 100%);
+        border-radius: 2px;
+    }
+
+    .about-content {
+        background: white;
+        border-radius: 25px;
+        padding: 50px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        animation: fadeInUp 0.8s ease;
+    }
+
+    /* ==================== About Grid ==================== */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: 50px;
+        align-items: start;
+    }
+
+    /* ==================== About Image ==================== */
+    .about-image-container {
+        position: sticky;
+        top: 120px;
+    }
+
+    .about-image {
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .about-image:hover {
+        transform: scale(1.05);
+    }
+
+    .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* ==================== About Text ==================== */
+    .about-text h2 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .about-text p {
+        font-size: 17px;
+        color: #555;
+        line-height: 1.9;
+        margin-bottom: 25px;
+        text-align: justify;
+    }
+
+    /* ==================== Info List ==================== */
+    .info-section {
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .info-section h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .info-list {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        border-left: 4px solid #3e5bda;
+    }
+
+    .info-item {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .info-item strong {
+        color: #5263ac;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .info-item span {
+        color: #333;
+        font-size: 16px;
+    }
+
+    /* ==================== Timeline Section ==================== */
+    .timeline-section {
+        margin-top: 60px;
+    }
+
+    .timeline-section h2 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 40px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .timeline-container {
+        background: white;
+        padding: 50px;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        margin-bottom: 40px;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #364899 0%, #2a1db5 100%);
+    }
+
+    .timeline-item {
+        padding: 30px;
+        margin-bottom: 30px;
+        position: relative;
+        background: #f8f9fa;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+        background: #3549a0;
+        transform: translateX(10px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .timeline-item:hover h3,
+    .timeline-item:hover .date,
+    .timeline-item:hover p {
+        color: white;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -52px;
+        top: 35px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #32469f;
+        border: 4px solid white;
+        box-shadow: 0 0 0 2px #2f51c1;
+        z-index: 1;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .timeline-item h3 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 10px;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .timeline-item .date {
+        color: #324bb9;
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 15px;
+        display: block;
+        transition: color 0.3s ease;
+    }
+
+    .timeline-item p {
+        color: #666;
+        line-height: 1.8;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    /* ==================== Animations ==================== */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ==================== Mobile Responsive ==================== */
+    @media screen and (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+        
+        .nav-links {
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background: white;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+        }
+        
+        .nav-links.active {
+            left: 0;
+        }
+
+        .about-content {
+            padding: 30px 25px;
+        }
+
+        .about-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .about-image-container {
+            position: relative;
+            top: 0;
+        }
+
+        .page-title {
+            font-size: 36px;
+        }
+
+        .about-text h2 {
+            font-size: 26px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .info-item {
+            grid-template-columns: 1fr;
+            gap: 5px;
+        }
+
+        .timeline-container {
+            padding: 30px 20px;
+        }
+
+        .timeline {
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            padding: 20px;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(0);
+        }
+
+        .timeline-section h2 {
+            font-size: 28px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">Shimaa Mohamed</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1 class="page-title">About Me</h1>
+        
+        <div class="about-content">
+            <div class="about-grid">
+                <!-- About Image -->
+                <div class="about-image-container">
+                    <div class="about-image">
+                        <img src="../images/Image.png" alt="Shimaa Mohamed">
+                    </div>
+                </div>
+                
+                <!-- About Text -->
+                <div class="about-text">
+                    <h2>👋 Hello!</h2>
+                    <p>
+                        I'm Shimaa Mohamed, a passionate software engineer who loves development and technology. 
+                        I believe in continuous learning and always strive to gain new experiences that help me 
+                        grow professionally.
+                    </p>
+                    <p>
+                        My journey in programming started when I discovered my passion for solving problems through code. 
+                        Since then, I've been dedicated to improving my skills and building innovative projects that 
+                        make a difference.
+                    </p>
+                    <p>
+                        I'm always excited to learn new technologies, work on challenging projects, and collaborate 
+                        with talented people. My goal is to become an expert software engineer who creates impactful 
+                        solutions.
+                    </p>
+                    
+                    <!-- Personal Info -->
+                    <div class="info-section">
+                        <h3>Personal Information</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <strong>Full Name:</strong>
+                                <span>Shimaa Mohamed</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Age:</strong>
+                                <span>20 years</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Location:</strong>
+                                <span>EL Nubaria, Egypt</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Field:</strong>
+                                <span>Software Engineering</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Email:</strong>
+                                <span>sh56sh56m@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="timeline-section">
+            <h2>🎓 Education</h2>
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Borg El Arab Technological University</h3>
+                        <span class="date">2023 - 2027</span>
+                        <p>
+                          I'm still studying, but I have experience in several fields. 
+                            Studied software engineering, algorithms, data structures, database systems, 
+                            and various programming languages including Java, Python, and C++.
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>High School Diploma</h3>
+                        <span class="date">2023-2024</span>
+                        <p>
+                            Completed high school with excellence in Mathematics and Science. 
+                            Developed strong analytical and problem-solving skills that laid the foundation 
+                            for my career in software engineering.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="timeline-section">
+            <h2>💼 Experience</h2>
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Software Engineer Intern</h3>
+                        <span class="date">June 2024 - August 2024</span>
+                        <p>
+                            TechCorp Solutions - Worked on developing web applications using React and Node.js. 
+                            Collaborated with senior developers on building RESTful APIs and implementing responsive 
+                            user interfaces. Learned best practices in version control using Git and participated 
+                            in Agile development processes.
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>Freelance Web Developer</h3>
+                        <span class="date">2024 - Present</span>
+                        <p>
+                            Worked on various freelance projects including portfolio websites, e-commerce platforms, 
+                            and business websites. Delivered high-quality solutions using HTML, CSS, JavaScript, 
+                            and modern frameworks. Maintained strong communication with clients to ensure project 
+                            requirements were met.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Wait until page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ===================== Hamburger Menu for Mobile =====================
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        }
+        
+        // ===================== Close menu when clicking on any link =====================
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        console.log('About page is ready! 🎉');
+    });
+    </script>
+</body>
+</html>
